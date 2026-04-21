@@ -1,0 +1,53 @@
+<view class="container">
+  <!-- 导航栏 -->
+  <view class="nav-bar">
+    <text class="nav-icon">👤</text>
+    <text class="nav-title">我的</text>
+  </view>
+
+  <!-- 用户信息头部 -->
+  <view class="user-header">
+    <view class="user-avatar">🙂</view>
+    <view class="user-id">{{anonymousId}}</view>
+
+    <view class="user-stats">
+      <view class="stat-item">
+        <view class="stat-num">{{stats.posts}}</view>
+        <view class="stat-label">发布</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">{{stats.comments}}</view>
+        <view class="stat-label">评论</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">{{stats.likes}}</view>
+        <view class="stat-label">获赞</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日数据卡片 -->
+  <view class="card">
+    <view class="card-title">
+      <text class="card-icon">📊</text>
+      <text>今日数据</text>
+    </view>
+    <view class="remain-count">{{remainCount}}</view>
+    <view class="remain-label">剩余发布次数</view>
+    <view class="reset-hint">⚠️ 次日 0 点重置</view>
+  </view>
+
+  <!-- 规则卡片 -->
+  <view class="card">
+    <view class="card-title">
+      <text class="card-icon">📋</text>
+      <text>发布规则</text>
+    </view>
+    <view class="rules-list">
+      <view class="rule-item">• 每天可发布 5 条真心话</view>
+      <view class="rule-item">• 每条内容最多 200 字</view>
+      <view class="rule-item">• 禁止人身攻击、违法内容</view>
+      <view class="rule-item">• 保护隐私，禁止泄露他人信息</view>
+    </view>
+  </view>
+</view>

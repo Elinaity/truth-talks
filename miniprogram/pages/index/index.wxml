@@ -1,0 +1,54 @@
+<view class="container">
+  <!-- 导航栏：话题下拉 -->
+  <view class="nav-bar">
+    <view class="nav-picker" bindtap="toggleCategoryPicker">
+      <text class="nav-picker-text">{{currentCategoryName}}</text>
+      <text class="nav-picker-arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
+    </view>
+  </view>
+
+  <!-- 弹窗遮罩 -->
+  <view class="picker-overlay" wx:if="{{showCategoryPicker}}" bindtap="toggleCategoryPicker">
+    <view class="picker-modal" catchtap="">
+      <view class="picker-title">选择话题</view>
+      <view
+        class="picker-item {{item.key === category ? 'active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="key"
+        bindtap="onSelectCategory"
+        data-key="{{item.key}}"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- 瀑布流列表 -->
+  <scroll-view class="feed" scroll-y bindscrolltolower="onLoadMore">
+    <view class="card" wx:for="{{posts}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+      <view class="card-content">{{item.content}}</view>
+      <view class="card-footer">
+        <view class="card-actions">
+          <view class="action-item" catchtap="onLike" data-id="{{item._id}}">
+            <text class="action-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+            <text class="action-count">{{item.likes}}</text>
+          </view>
+          <view class="action-item">
+            <text class="action-icon">💬</text>
+            <text class="action-count">{{item.commentCount}}</text>
+          </view>
+        </view>
+        <text class="time-text">{{item.timeAgo}}</text>
+      </view>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{noMore && posts.length > 0}}">
+      <text>没有更多了</text>
+    </view>
+    <view class="empty" wx:if="{{!loading && posts.length === 0}}">
+      <text>还没有真心话</text>
+      <text class="empty-hint">成为第一个说真心话的人吧</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,118 @@
+.container {
+  min-height: 100vh;
+  background: #F7F5F2;
+}
+
+.nav-bar {
+  height: 56px;
+  background: #6B5B95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-icon {
+  position: absolute;
+  left: 20px;
+  font-size: 20px;
+}
+
+.user-header {
+  background: #6B5B95;
+  padding: 30px 20px;
+  color: #fff;
+}
+
+.user-avatar {
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 12px;
+}
+
+.user-id {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.user-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.card {
+  margin: 16px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 14px;
+  color: #2D2D2D;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-icon {
+  font-size: 16px;
+}
+
+.remain-count {
+  font-size: 24px;
+  color: #6B5B95;
+  font-weight: 600;
+}
+
+.remain-label {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.reset-hint {
+  font-size: 11px;
+  color: #ccc;
+  margin-top: 8px;
+}
+
+.rules-list {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+}
+
+.rule-item {
+  margin-bottom: 4px;
+}

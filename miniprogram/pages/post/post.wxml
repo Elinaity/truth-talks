@@ -1,0 +1,48 @@
+<view class="container">
+  <!-- 发布表单 -->
+  <view class="post-form">
+    <!-- 类目标签 -->
+    <view class="category-wrap">
+      <view class="category-label">选择类目</view>
+      <scroll-view class="category-list" scroll-x>
+        <view
+          class="category-chip {{item.key === category ? 'active' : ''}}"
+          wx:for="{{categories}}"
+          wx:key="key"
+          bindtap="onSelectCategory"
+          data-key="{{item.key}}"
+        >{{item.name}}</view>
+      </scroll-view>
+    </view>
+
+
+    <textarea
+      class="input-textarea"
+      placeholder="说点什么...（限200字）"
+      maxlength="200"
+      bindinput="onInput"
+      value="{{content}}"
+    ></textarea>
+
+    <view class="char-count">
+      <text class="{{charCount > 180 ? 'warning' : ''}}">{{charCount}}</text>/200
+    </view>
+
+    <view class="hint-box">
+      <text class="hint-icon">⚠️</text>
+      <text class="hint-text">每天可发布 </text>
+      <text class="hint-highlight">5</text>
+      <text class="hint-text"> 次</text>
+      <view class="hint-divider"></view>
+      <text class="hint-text">今日已用：</text>
+      <text class="hint-highlight">{{usedCount}}</text>
+      <text class="hint-text"> 次</text>
+    </view>
+
+    <button
+      class="btn-primary {{canPost ? '' : 'disabled'}}"
+      bindtap="onSubmit"
+      disabled="{{!canPost}}"
+    >发布</button>
+  </view>
+</view>

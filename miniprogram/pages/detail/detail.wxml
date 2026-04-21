@@ -1,0 +1,58 @@
+<view class="container">
+  <!-- 导航栏 -->
+  <view class="nav-bar">
+    <text class="nav-back" bindtap="goBack">←</text>
+    <text class="nav-title">真心话</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content" scroll-y>
+    <!-- 帖子主体 -->
+    <view class="post-card">
+      <view class="post-content">{{post.content}}</view>
+      <view class="post-meta">
+        <text class="meta-text">发布于 {{post.timeAgo}}</text>
+        <text class="meta-divider">·</text>
+        <text class="meta-text">来自 {{post.authorId}}</text>
+      </view>
+      <view class="post-stats">
+        <view class="stat-item" bindtap="onLike">
+          <text class="stat-icon">{{post.isLiked ? '❤️' : '🤍'}}</text>
+          <text class="stat-text">{{post.likes}} 赞</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-icon">💬</text>
+          <text class="stat-text">{{post.commentCount}} 评论</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 评论列表 -->
+    <view class="comments-section">
+      <view class="comments-title">— 评论 —</view>
+      <view class="comments-list">
+        <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+          <view class="comment-user">{{item.authorId}}</view>
+          <view class="comment-text">{{item.content}}</view>
+          <view class="comment-time">{{item.timeAgo}}</view>
+        </view>
+      </view>
+      <view class="no-comments" wx:if="{{comments.length === 0 && !loading}}">
+        <text>还没有评论</text>
+        <text class="hint">来成为第一个评论的人吧</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 评论输入框 -->
+  <view class="comment-input-wrap">
+    <input
+      class="comment-input"
+      placeholder="说点什么..."
+      bindconfirm="onSubmitComment"
+      value="{{commentText}}"
+      confirm-type="send"
+    />
+    <text class="comment-send" bindtap="onSubmitComment">发送</text>
+  </view>
+</view>
