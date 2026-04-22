@@ -1,8 +1,7 @@
 <view class="container">
-  <!-- 下拉选择器按钮 -->
-  <view class="dropdown-btn" bindtap="toggleCategoryPicker">
-    <text class="dropdown-text">{{currentCategoryName}}</text>
-    <text class="dropdown-arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
+  <!-- 右侧下拉按钮 - 嵌入原生导航栏右侧 -->
+  <view class="nav-dropdown" bindtap="toggleCategoryPicker">
+    <text class="nav-dropdown-arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
   </view>
 
   <!-- 弹窗遮罩 -->
