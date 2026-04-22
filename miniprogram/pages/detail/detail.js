@@ -1,4 +1,5 @@
 const app = getApp()
+const { timeAgo } = require('../../utils.js')
 
 Page({
   data: {
@@ -6,7 +7,8 @@ Page({
     post: {},
     comments: [],
     commentText: '',
-    loading: false
+    loading: false,
+    submitting: false
   },
 
   onLoad(options) {
@@ -28,13 +30,6 @@ Page({
       }
 
       const post = result.data
-      const now = Date.now()
-      const diff = now - post.createdAt
-      let timeAgo = ''
-      if (diff < 60000) timeAgo = '刚刚'
-      else if (diff < 3600000) timeAgo = `${Math.floor(diff/60000)}分钟前`
-      else if (diff < 86400000) timeAgo = `${Math.floor(diff/3600000)}小时前`
-      else timeAgo = `${Math.floor(diff/86400000)}天前`
 
       // 检查是否点赞
       const likedPosts = wx.getStorageSync('likedPosts') || []
@@ -42,7 +37,7 @@ Page({
       this.setData({
         post: {
           ...post,
-          timeAgo,
+          timeAgo: timeAgo(post.createdAt),
           isLiked: likedPosts.includes(post._id)
         }
       })
@@ -62,17 +57,10 @@ Page({
         .orderBy('createdAt', 'asc')
         .get()
 
-      const now = Date.now()
-      const comments = result.data.map(item => {
-        const diff = now - item.createdAt
-        let timeAgo = ''
-        if (diff < 60000) timeAgo = '刚刚'
-        else if (diff < 3600000) timeAgo = `${Math.floor(diff/60000)}分钟前`
-        else if (diff < 86400000) timeAgo = `${Math.floor(diff/3600000)}小时前`
-        else timeAgo = `${Math.floor(diff/86400000)}天前`
-
-        return { ...item, timeAgo }
-      })
+      const comments = result.data.map(item => ({
+        ...item,
+        timeAgo: timeAgo(item.createdAt)
+      }))
 
       this.setData({ comments, loading: false })
     } catch (e) {
@@ -120,12 +108,16 @@ Page({
 
   // 提交评论
   async onSubmitComment(e) {
+    if (this.data.submitting) return
+    
     const content = e.detail.value || this.data.commentText
 
     if (!content.trim()) {
       wx.showToast({ title: '请输入评论', icon: 'none' })
       return
     }
+
+    this.setData({ submitting: true })
 
     try {
       const db = wx.cloud.database()
@@ -148,7 +140,7 @@ Page({
         }
       })
 
-      this.setData({ commentText: '' })
+      this.setData({ commentText: '', submitting: false })
 
       // 刷新评论和帖子
       this.loadComments()
@@ -158,8 +150,25 @@ Page({
 
     } catch (e) {
       console.error('评论失败', e)
+      this.setData({ submitting: false })
       wx.showToast({ title: '评论失败', icon: 'none' })
     }
+  },
+
+  // 分享
+  onShareAppMessage() {
+    const { post } = this.data
+    return {
+      title: post.content ? post.content.slice(0, 20) + '...' : '真心话',
+      path: `/pages/detail/detail?id=${this.data.postId}`
+    }
+  },
+
+  // 下拉刷新
+  onPullDownRefresh() {
+    Promise.all([this.loadPost(), this.loadComments()]).finally(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   // 输入监听

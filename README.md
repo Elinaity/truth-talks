@@ -11,6 +11,11 @@
 - ✅ 匿名ID系统
 - ✅ 每日次数重置
 - ✅ 个人数据中心
+- ✅ 分享功能（可分享帖子到好友）
+- ✅ 下拉刷新
+- ✅ 内容安全检查（敏感词过滤）
+- ✅ 我的帖子列表
+- ✅ 代码模块化（共享工具函数）
 
 ## 项目结构
 
@@ -76,14 +81,14 @@ wx.cloud.init({
 | authorId | string | 评论者匿名ID |
 | createdAt | number | 创建时间戳 |
 
-### 4. 添加TabBar图标
+### 4. TabBar图标
 
-在 `miniprogram/styles/icons/` 目录下添加以下图标文件：
+图标目录 `miniprogram/styles/icons/` 已包含占位图标。如需自定义，可替换以下文件：
 - `home.png` / `home-active.png`
 - `post.png` / `post-active.png`
 - `mine.png` / `mine-active.png`
 
-（图标尺寸建议：81×81 px）
+（图标尺寸建议：81×81 px，PNG格式）
 
 ### 5. 导入项目
 
@@ -98,9 +103,10 @@ wx.cloud.init({
 
 ## 待实现功能
 
-- [ ] 内容审核（敏感词过滤）
 - [ ] 用户举报功能
 - [ ] 图片理解 & 网络搜索 MCP（需单独配置）
+- [ ] 深色模式支持
+- [ ] 更多类目管理
 
 ## 技术栈
 

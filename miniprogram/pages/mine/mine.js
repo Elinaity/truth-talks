@@ -1,4 +1,5 @@
 const app = getApp()
+const { timeAgo } = require('../../utils.js')
 
 Page({
   data: {
@@ -8,7 +9,9 @@ Page({
       posts: 0,
       comments: 0,
       likes: 0
-    }
+    },
+    myPosts: [],
+    loadingPosts: false
   },
 
   onLoad() {
@@ -36,7 +39,7 @@ Page({
 
       // 查询我的发布
       const postsResult = await db.collection('posts')
-        .where({ authorId: anonymousId })
+        .where({ authorId: anonymousId, isDeleted: false })
         .count()
 
       // 查询我的评论
@@ -46,7 +49,7 @@ Page({
 
       // 统计获赞数（从所有帖子的点赞数累加）
       const postsList = await db.collection('posts')
-        .where({ authorId: anonymousId })
+        .where({ authorId: anonymousId, isDeleted: false })
         .field({ likes: true })
         .get()
 
@@ -62,5 +65,45 @@ Page({
     } catch (e) {
       console.error('加载统计失败', e)
     }
+  },
+
+  // 加载我的帖子
+  async loadMyPosts() {
+    this.setData({ loadingPosts: true })
+    try {
+      const db = wx.cloud.database()
+      const anonymousId = wx.getStorageSync('anonymousId')
+      
+      const result = await db.collection('posts')
+        .where({ authorId: anonymousId, isDeleted: false })
+        .orderBy('createdAt', 'desc')
+        .limit(10)
+        .get()
+      
+      const myPosts = result.data.map(item => ({
+        ...item,
+        timeAgo: timeAgo(item.createdAt)
+      }))
+      
+      this.setData({ myPosts, loadingPosts: false })
+    } catch (e) {
+      console.error('加载我的帖子失败', e)
+      this.setData({ loadingPosts: false })
+    }
+  },
+
+  // 跳转详情
+  goToDetail(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/detail/detail?id=${id}`
+    })
+  },
+
+  // 下拉刷新
+  onPullDownRefresh() {
+    Promise.all([this.loadStats(), this.loadMyPosts()]).finally(() => {
+      wx.stopPullDownRefresh()
+    })
   }
 })

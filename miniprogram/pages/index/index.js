@@ -1,4 +1,5 @@
 const app = getApp()
+const { CATEGORIES, timeAgo } = require('../../utils.js')
 
 Page({
   data: {
@@ -10,15 +11,7 @@ Page({
     pageSize: 20,
     category: 'all',
     currentCategoryName: '全部',
-    categories: [
-      { key: 'all', name: '全部' },
-      { key: 'truth', name: '💬 真心话' },
-      { key: 'chat', name: '🗣️ 闲聊' },
-      { key: 'life', name: '🏠 家常趣事' },
-      { key: 'horror', name: '👻 灵异话题' },
-      { key: 'positive', name: '✨ 正能量' },
-      { key: 'funny', name: '😂 搞笑' }
-    ]
+    categories: CATEGORIES
   },
 
   onLoad() {
@@ -62,21 +55,11 @@ Page({
       const likedPosts = wx.getStorageSync('likedPosts') || []
       const now = Date.now()
 
-      const posts = result.data.map(item => {
-        // 计算时间差
-        const diff = now - item.createdAt
-        let timeAgo = ''
-        if (diff < 60000) timeAgo = '刚刚'
-        else if (diff < 3600000) timeAgo = `${Math.floor(diff/60000)}分钟前`
-        else if (diff < 86400000) timeAgo = `${Math.floor(diff/3600000)}小时前`
-        else timeAgo = `${Math.floor(diff/86400000)}天前`
-
-        return {
-          ...item,
-          timeAgo,
-          isLiked: likedPosts.includes(item._id)
-        }
-      })
+      const posts = result.data.map(item => ({
+        ...item,
+        timeAgo: timeAgo(item.createdAt),
+        isLiked: likedPosts.includes(item._id)
+      }))
 
       this.setData({
         posts: this.data.page === 0 ? posts : [...this.data.posts, ...posts],

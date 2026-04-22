@@ -1,4 +1,5 @@
 const app = getApp()
+const { POST_CATEGORIES, checkContent } = require('../../utils.js')
 
 Page({
   data: {
@@ -7,14 +8,7 @@ Page({
     usedCount: 0,
     canPost: false,
     category: 'truth',
-    categories: [
-      { key: 'truth', name: '💬 真心话' },
-      { key: 'chat', name: '🗣️ 闲聊' },
-      { key: 'life', name: '🏠 家常趣事' },
-      { key: 'horror', name: '👻 灵异话题' },
-      { key: 'positive', name: '✨ 正能量' },
-      { key: 'funny', name: '😂 搞笑' }
-    ]
+    categories: POST_CATEGORIES
   },
 
   onLoad() {
@@ -58,6 +52,13 @@ Page({
 
     if (!content.trim()) {
       wx.showToast({ title: '请输入内容', icon: 'none' })
+      return
+    }
+
+    // 敏感词检查
+    const check = checkContent(content)
+    if (!check.safe) {
+      wx.showToast({ title: '内容包含敏感词，请修改', icon: 'none' })
       return
     }
 

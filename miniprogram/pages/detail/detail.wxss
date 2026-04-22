@@ -23,6 +23,20 @@
   font-size: 20px;
 }
 
+.nav-share {
+  position: absolute;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 4px 12px;
+}
+
+.nav-share::after {
+  display: none;
+}
+
 .content {
   flex: 1;
   overflow-y: auto;
