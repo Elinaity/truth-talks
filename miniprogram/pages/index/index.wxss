@@ -5,35 +5,38 @@
   background: #F7F5F2;
 }
 
-.nav-bar {
+/* 下拉选择器按钮 - 位于原生导航栏下方右侧 */
+.dropdown-btn {
+  position: fixed;
+  top: 0;
+  right: 40px;
   height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 12px;
+  z-index: 100;
   background: #6B5B95;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  border-radius: 0 0 8px 8px;
 }
 
-.nav-picker {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.nav-picker-text {
-  font-size: 18px;
+.dropdown-text {
+  font-size: 14px;
   font-weight: 500;
   color: #fff;
-  letter-spacing: 2px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.nav-picker-arrow {
+.dropdown-arrow {
   font-size: 10px;
   color: rgba(255,255,255,0.7);
   transition: transform 0.2s;
 }
 
-.nav-picker-arrow.up {
+.dropdown-arrow.up {
   transform: rotate(180deg);
 }
 

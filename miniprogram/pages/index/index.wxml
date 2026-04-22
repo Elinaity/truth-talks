@@ -1,10 +1,8 @@
 <view class="container">
-  <!-- 导航栏：话题下拉 -->
-  <view class="nav-bar">
-    <view class="nav-picker" bindtap="toggleCategoryPicker">
-      <text class="nav-picker-text">{{currentCategoryName}}</text>
-      <text class="nav-picker-arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
-    </view>
+  <!-- 下拉选择器按钮 -->
+  <view class="dropdown-btn" bindtap="toggleCategoryPicker">
+    <text class="dropdown-text">{{currentCategoryName}}</text>
+    <text class="dropdown-arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
   </view>
 
   <!-- 弹窗遮罩 -->
