@@ -5,26 +5,26 @@
   background: #F7F5F2;
 }
 
-/* 右侧下拉按钮 - 位于原生导航栏右侧 */
+/* 右侧下拉按钮 - 嵌入原生导航栏 */
 .nav-dropdown {
   position: fixed;
-  top: 0;
-  right: 8px;
-  width: 44px;
+  top: calc(env(safe-area-inset-top) + 2px);
+  right: 4px;
+  width: 48px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 101;
+  z-index: 9999;
 }
 
-.nav-dropdown-arrow {
-  font-size: 10px;
-  color: rgba(255,255,255,0.85);
+.nav-dropdown .arrow {
+  font-size: 11px;
+  color: rgba(255,255,255,0.9);
   transition: transform 0.2s;
 }
 
-.nav-dropdown-arrow.up {
+.nav-dropdown .arrow.up {
   transform: rotate(180deg);
 }
 
