@@ -1,7 +1,10 @@
 <view class="container">
-  <!-- 右侧下拉按钮 -->
-  <view class="nav-dropdown" bindtap="toggleCategoryPicker">
-    <text class="arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
+  <!-- 顶部类目选择栏 -->
+  <view class="category-bar">
+    <view class="category-current" bindtap="toggleCategoryPicker">
+      <text>{{currentCategoryName}}</text>
+      <text class="arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
+    </view>
   </view>
 
   <!-- 弹窗遮罩 -->
