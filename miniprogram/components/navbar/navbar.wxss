@@ -1,0 +1,54 @@
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: #6b5b95;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.navbar-title-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* .navbar-title-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+} */
+
+.navbar-title {
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.navbar-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-text {
+  font-size: 10px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.arrow-text.up {
+  transform: rotate(180deg);
+}

@@ -5,32 +5,11 @@
   background: #F7F5F2;
 }
 
-/* 顶部类目选择栏 - 位于原生导航栏下方 */
-.category-bar {
-  padding: 8px 16px;
-  background: #6B5B95;
-  display: flex;
-  align-items: center;
-}
-
-.category-current {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #fff;
-  font-size: 14px;
-  padding: 6px 12px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 20px;
-}
-
-.category-current .arrow {
-  font-size: 10px;
-  transition: transform 0.2s;
-}
-
-.category-current .arrow.up {
-  transform: rotate(180deg);
+.navbar-placeholder {
+  width: 100%;
+  background-color: #6b5b95;
+  height: 50px;
+  flex-shrink: 0;
 }
 
 .feed {
