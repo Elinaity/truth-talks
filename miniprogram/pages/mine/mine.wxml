@@ -4,6 +4,20 @@
     <view class="user-avatar">🙂</view>
     <view class="user-id">{{anonymousId}}</view>
 
+    <!-- 等级信息 -->
+    <view class="level-badge" wx:if="{{levelInfo}}">
+      <text class="level-icon">{{levelInfo.icon}}</text>
+      <text class="level-name">Lv.{{levelInfo.level}} {{levelInfo.name}}</text>
+    </view>
+    <view class="exp-info" wx:if="{{expProgress}}">
+      <text class="exp-text">经验 {{expProgress.current.minExp}} / {{expProgress.next ? expProgress.next.minExp : expProgress.current.minExp}}</text>
+      <view class="exp-bar" wx:if="{{expProgress.next}}">
+        <view class="exp-progress" style="width: {{expProgress.progress}}%"></view>
+      </view>
+      <text class="exp-hint" wx:if="{{expProgress.next}}">再攒 {{expProgress.expToNext}} 经验升级</text>
+      <text class="exp-max" wx:if="{{!expProgress.next}}">已满级</text>
+    </view>
+
     <view class="user-stats">
       <view class="stat-item">
         <view class="stat-num">{{stats.posts}}</view>

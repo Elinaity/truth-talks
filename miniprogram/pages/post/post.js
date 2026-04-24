@@ -1,5 +1,5 @@
 const app = getApp()
-const { CATEGORIES, checkContent } = require('../../utils.js')
+const { CATEGORIES, checkContent, EXP } = require('../../utils.js')
 
 Page({
   data: {
@@ -105,6 +105,9 @@ Page({
       // 更新使用次数
       const newCount = usedCount + 1
       wx.setStorageSync('dailyCount', newCount)
+
+      // 增加经验值
+      app.addExp(EXP.POST, 'post')
 
       wx.hideLoading()
       wx.showToast({ title: '发布成功', icon: 'success' })

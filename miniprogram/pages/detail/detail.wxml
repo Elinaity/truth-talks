@@ -18,6 +18,10 @@
           <text class="stat-icon">💬</text>
           <text class="stat-text">{{post.commentCount}} 评论</text>
         </view>
+        <view class="stat-item" bindtap="onShare">
+          <text class="stat-icon">↗️</text>
+          <text class="stat-text">分享</text>
+        </view>
       </view>
     </view>
 

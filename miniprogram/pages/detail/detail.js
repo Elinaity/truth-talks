@@ -1,5 +1,5 @@
 const app = getApp()
-const { timeAgo } = require('../../utils.js')
+const { timeAgo, EXP } = require('../../utils.js')
 
 Page({
   data: {
@@ -142,6 +142,9 @@ Page({
 
       this.setData({ commentText: '', submitting: false })
 
+      // 增加经验值
+      app.addExp(EXP.COMMENT, 'comment')
+
       // 刷新评论和帖子
       this.loadComments()
       this.loadPost()
@@ -156,6 +159,14 @@ Page({
   },
 
   // 分享
+  onShare() {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+  },
+
+  // 分享到朋友
   onShareAppMessage() {
     const { post } = this.data
     return {

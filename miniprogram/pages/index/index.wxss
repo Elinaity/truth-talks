@@ -115,6 +115,10 @@
   font-size: 12px;
 }
 
+.share-btn {
+  opacity: 0.8;
+}
+
 .loading, .no-more, .empty {
   text-align: center;
   padding: 20px;

@@ -1,5 +1,5 @@
 const app = getApp()
-const { CATEGORIES, timeAgo } = require('../../utils.js')
+const { CATEGORIES, timeAgo, EXP } = require('../../utils.js')
 
 Page({
   data: {
@@ -131,6 +131,13 @@ Page({
       // 更新点赞记录
       if (!isLiked) {
         likedPosts.push(id)
+
+        // 给帖主增加经验（只有点赞才加，被取消不加）
+        const authorId = post.authorId
+        const currentUserId = wx.getStorageSync('anonymousId')
+        if (authorId !== currentUserId) {
+          app.addExp(EXP.RECEIVE_LIKE, 'receive_like')
+        }
       } else {
         const index = likedPosts.indexOf(id)
         if (index > -1) likedPosts.splice(index, 1)
@@ -142,6 +149,22 @@ Page({
       console.error('点赞失败', e)
       wx.showToast({ title: '操作失败', icon: 'none' })
     }
+  },
+
+  // 分享
+  onShare(e) {
+    const id = e.currentTarget.dataset.id
+    const post = this.data.posts.find(p => p._id === id)
+    if (!post) return
+
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+
+    wx.navigateTo({
+      url: `/pages/detail/detail?id=${id}`
+    })
   },
 
   // 下拉刷新

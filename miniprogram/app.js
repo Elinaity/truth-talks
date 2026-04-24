@@ -3,7 +3,9 @@ App({
     userInfo: null,
     anonymousId: null,
     dailyCount: 0,
-    lastResetDate: null
+    lastResetDate: null,
+    experience: 0,
+    level: 1
   },
 
   onLaunch() {
@@ -17,6 +19,42 @@ App({
     this.checkAndGenerateAnonymousId();
     // 检查日期重置次数
     this.checkDailyReset();
+    // 初始化经验值
+    this.initUserExp();
+  },
+
+  // 初始化用户经验值
+  initUserExp() {
+    const exp = wx.getStorageSync('userExp') || 0
+    const { getLevelByExp } = require('./utils.js')
+    const level = getLevelByExp(exp)
+    this.globalData.experience = exp
+    this.globalData.level = level.level
+  },
+
+  // 增加经验值
+  addExp(amount, type) {
+    const exp = this.globalData.experience + amount
+    const { getLevelByExp, getLevelProgress } = require('./utils.js')
+    const newLevel = getLevelByExp(exp)
+
+    // 保存到本地
+    wx.setStorageSync('userExp', exp)
+
+    // 更新全局数据
+    this.globalData.experience = exp
+    this.globalData.level = newLevel.level
+
+    // 检查升级
+    if (newLevel.level > this.globalData.level) {
+      wx.showToast({
+        title: `升级！${newLevel.icon}${newLevel.name}`,
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
+    return { exp, level: newLevel }
   },
 
   // 生成随机匿名ID
