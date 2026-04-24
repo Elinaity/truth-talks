@@ -1,5 +1,5 @@
 const app = getApp()
-const { timeAgo } = require('../../utils.js')
+const { timeAgo, getLevelByExp, getLevelProgress } = require('../../utils.js')
 
 Page({
   data: {
@@ -11,7 +11,9 @@ Page({
       likes: 0
     },
     myPosts: [],
-    loadingPosts: false
+    loadingPosts: false,
+    levelInfo: null,
+    expProgress: null
   },
 
   onLoad() {
@@ -19,12 +21,22 @@ Page({
     this.updateRemainCount()
     this.loadStats()
     this.loadMyPosts()
+    this.loadLevelInfo()
   },
 
   onShow() {
     this.updateRemainCount()
     this.loadStats()
     this.loadMyPosts()
+    this.loadLevelInfo()
+  },
+
+  // 加载等级信息
+  loadLevelInfo() {
+    const exp = wx.getStorageSync('userExp') || 0
+    const levelInfo = getLevelByExp(exp)
+    const expProgress = getLevelProgress(exp)
+    this.setData({ levelInfo, expProgress })
   },
 
   // 更新剩余次数

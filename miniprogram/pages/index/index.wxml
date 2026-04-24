@@ -33,6 +33,9 @@
             <text class="action-icon">💬</text>
             <text class="action-count">{{item.commentCount}}</text>
           </view>
+          <view class="action-item share-btn" catchtap="onShare">
+            <text class="action-icon">↗️</text>
+          </view>
         </view>
         <text class="time-text">{{item.timeAgo}}</text>
       </view>

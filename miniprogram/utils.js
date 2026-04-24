@@ -48,11 +48,67 @@ function getCategoryName(key) {
   return cat?.name || '全部'
 }
 
+// ============ 等级系统 ============
+const LEVELS = [
+  { level: 1, name: '新手', minExp: 0, icon: '🌱' },
+  { level: 2, name: '入门', minExp: 100, icon: '🌿' },
+  { level: 3, name: '成长', minExp: 300, icon: '🌾' },
+  { level: 4, name: '熟手', minExp: 600, icon: '🌳' },
+  { level: 5, name: '老手', minExp: 1000, icon: '🍃' },
+  { level: 6, name: '达人', minExp: 1500, icon: '🌲' },
+  { level: 7, name: '精英', minExp: 2200, icon: '🏵️' },
+  { level: 8, name: '大师', minExp: 3000, icon: '🎖️' },
+  { level: 9, name: '传奇', minExp: 4000, icon: '👑' },
+  { level: 10, name: '神话', minExp: 5500, icon: '✨' }
+]
+
+// 经验值常量
+const EXP = {
+  POST: 20,      // 发布帖子
+  COMMENT: 10,   // 发表评论
+  RECEIVE_LIKE: 5 // 帖子被点赞
+}
+
+// 根据经验计算等级
+function getLevelByExp(exp) {
+  let level = LEVELS[0]
+  for (const l of LEVELS) {
+    if (exp >= l.minExp) {
+      level = l
+    } else {
+      break
+    }
+  }
+  return level
+}
+
+// 获取当前等级到下一级的进度
+function getLevelProgress(exp) {
+  const current = getLevelByExp(exp)
+  const currentIndex = LEVELS.findIndex(l => l.level === current.level)
+  const nextLevel = LEVELS[currentIndex + 1]
+
+  if (!nextLevel) {
+    return { current, next: null, progress: 100, expToNext: 0 }
+  }
+
+  const expInCurrentLevel = exp - current.minExp
+  const expNeededForLevel = nextLevel.minExp - current.minExp
+  const progress = Math.min(100, Math.round((expInCurrentLevel / expNeededForLevel) * 100))
+  const expToNext = nextLevel.minExp - exp
+
+  return { current, next: nextLevel, progress, expToNext }
+}
+
 module.exports = {
   CATEGORIES,
   POST_CATEGORIES,
   timeAgo,
   checkContent,
   getCategoryName,
-  SENSITIVE_WORDS
+  SENSITIVE_WORDS,
+  LEVELS,
+  EXP,
+  getLevelByExp,
+  getLevelProgress
 }
