@@ -1,11 +1,4 @@
 <view class="container">
-  <!-- 导航栏 -->
-  <view class="nav-bar">
-    <text class="nav-back" bindtap="goBack">←</text>
-    <text class="nav-title">真心话</text>
-    <button class="nav-share" open-type="share" hover-class="none">分享</button>
-  </view>
-
   <!-- 内容区域 -->
   <scroll-view class="content" scroll-y>
     <!-- 帖子主体 -->
@@ -50,6 +43,7 @@
     <input
       class="comment-input"
       placeholder="说点什么..."
+      bindinput="onCommentInput"
       bindconfirm="onSubmitComment"
       value="{{commentText}}"
       confirm-type="send"

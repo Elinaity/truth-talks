@@ -7,7 +7,7 @@
 
   <!-- 弹窗遮罩 -->
   <view class="picker-overlay" wx:if="{{showCategoryPicker}}" bindtap="toggleCategoryPicker">
-    <view class="picker-modal" catchtap="">
+    <view class="picker-modal" catch:tap="preventTap">
       <view class="picker-title">选择话题</view>
       <view
         class="picker-item {{item.key === category ? 'active' : ''}}"

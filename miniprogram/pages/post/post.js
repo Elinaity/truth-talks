@@ -29,6 +29,10 @@ Page({
     this.setData({ showCategoryPicker: !this.data.showCategoryPicker })
   },
 
+  preventTap() {
+    // 阻止事件冒泡到遮罩层
+  },
+
   // 选择类目
   onSelectCategory(e) {
     const key = e.currentTarget.dataset.key
@@ -55,7 +59,7 @@ Page({
     this.setData({
       content,
       charCount,
-      canPost: usedCount < 5 && charCount > 0 && charCount <= 200
+      canPost: usedCount < 5 && charCount > 0 && charCount <= 500
     })
   },
 

@@ -18,11 +18,13 @@ Page({
     this.setData({ anonymousId: wx.getStorageSync('anonymousId') || '匿名用户' })
     this.updateRemainCount()
     this.loadStats()
+    this.loadMyPosts()
   },
 
   onShow() {
     this.updateRemainCount()
     this.loadStats()
+    this.loadMyPosts()
   },
 
   // 更新剩余次数

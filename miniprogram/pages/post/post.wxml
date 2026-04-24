@@ -7,7 +7,7 @@
 
   <!-- 弹窗遮罩 -->
   <view class="picker-overlay" wx:if="{{showCategoryPicker}}" bindtap="toggleCategoryPicker">
-    <view class="picker-modal" catchtap="">
+    <view class="picker-modal" catch:tap="preventTap">
       <view class="picker-title">选择话题</view>
       <view
         class="picker-item {{item.key === category ? 'active' : ''}}"
@@ -23,14 +23,14 @@
   <view class="post-form">
     <textarea
       class="input-textarea"
-      placeholder="说点什么...（限200字）"
-      maxlength="200"
+      placeholder="说点什么...（限500字）"
+      maxlength="500"
       bindinput="onInput"
       value="{{content}}"
     ></textarea>
 
     <view class="char-count">
-      <text class="{{charCount > 180 ? 'warning' : ''}}">{{charCount}}</text>/200
+      <text class="{{charCount > 480 ? 'warning' : ''}}">{{charCount}}</text>/500
     </view>
 
     <view class="hint-box">
