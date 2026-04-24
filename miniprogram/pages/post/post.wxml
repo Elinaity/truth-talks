@@ -1,21 +1,26 @@
 <view class="container">
+  <!-- 占位填充块 -->
+  <view class="navbar-placeholder"></view>
+
+  <!-- 自定义导航栏 -->
+  <navbar title="{{currentCategoryName}}" showPicker="{{showCategoryPicker}}" bind:arrowTap="toggleCategoryPicker" />
+
+  <!-- 弹窗遮罩 -->
+  <view class="picker-overlay" wx:if="{{showCategoryPicker}}" bindtap="toggleCategoryPicker">
+    <view class="picker-modal" catchtap="">
+      <view class="picker-title">选择话题</view>
+      <view
+        class="picker-item {{item.key === category ? 'active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="key"
+        bindtap="onSelectCategory"
+        data-key="{{item.key}}"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
   <!-- 发布表单 -->
   <view class="post-form">
-    <!-- 类目标签 -->
-    <view class="category-wrap">
-      <view class="category-label">选择类目</view>
-      <scroll-view class="category-list" scroll-x>
-        <view
-          class="category-chip {{item.key === category ? 'active' : ''}}"
-          wx:for="{{categories}}"
-          wx:key="key"
-          bindtap="onSelectCategory"
-          data-key="{{item.key}}"
-        >{{item.name}}</view>
-      </scroll-view>
-    </view>
-
-
     <textarea
       class="input-textarea"
       placeholder="说点什么...（限200字）"

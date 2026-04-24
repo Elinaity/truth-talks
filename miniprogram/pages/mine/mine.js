@@ -73,18 +73,18 @@ Page({
     try {
       const db = wx.cloud.database()
       const anonymousId = wx.getStorageSync('anonymousId')
-      
+
       const result = await db.collection('posts')
         .where({ authorId: anonymousId, isDeleted: false })
         .orderBy('createdAt', 'desc')
         .limit(10)
         .get()
-      
+
       const myPosts = result.data.map(item => ({
         ...item,
         timeAgo: timeAgo(item.createdAt)
       }))
-      
+
       this.setData({ myPosts, loadingPosts: false })
     } catch (e) {
       console.error('加载我的帖子失败', e)

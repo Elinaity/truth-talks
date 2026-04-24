@@ -1,5 +1,5 @@
 const app = getApp()
-const { POST_CATEGORIES, checkContent } = require('../../utils.js')
+const { CATEGORIES, checkContent } = require('../../utils.js')
 
 Page({
   data: {
@@ -8,10 +8,15 @@ Page({
     usedCount: 0,
     canPost: false,
     category: 'truth',
-    categories: POST_CATEGORIES
+    currentCategoryName: '真心话',
+    categories: CATEGORIES,
+    showCategoryPicker: false
   },
 
   onLoad() {
+    const cats = this.data.categories
+    const name = cats.find(c => c.key === 'truth')?.name || '真心话'
+    this.setData({ currentCategoryName: name })
     this.updateUsedCount()
   },
 
@@ -19,9 +24,17 @@ Page({
     this.updateUsedCount()
   },
 
+  // 切换类目选择器
+  toggleCategoryPicker() {
+    this.setData({ showCategoryPicker: !this.data.showCategoryPicker })
+  },
+
   // 选择类目
   onSelectCategory(e) {
-    this.setData({ category: e.currentTarget.dataset.key })
+    const key = e.currentTarget.dataset.key
+    const cats = this.data.categories
+    const name = cats.find(c => c.key === key)?.name || '真心话'
+    this.setData({ category: key, currentCategoryName: name, showCategoryPicker: false })
   },
 
   // 更新已用次数

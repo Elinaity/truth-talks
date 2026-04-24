@@ -1,0 +1,8 @@
+<view class="navbar">
+  <view class="navbar-content">
+    <view class="navbar-title-row" bindtap="onArrowTap">
+      <text class="navbar-title">{{title}}</text>
+      <text class="arrow-text {{showPicker ? 'up' : ''}}">▼</text>
+    </view>
+  </view>
+</view>

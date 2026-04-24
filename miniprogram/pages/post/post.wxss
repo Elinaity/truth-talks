@@ -5,8 +5,58 @@
   background: #F7F5F2;
 }
 
+.navbar-placeholder {
+  width: 100%;
+  background-color: #6b5b95;
+  height: 50px;
+  flex-shrink: 0;
+}
 
+/* 话题选择器 */
+.picker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.picker-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 280px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 8px 0 20px;
+}
+
+.picker-title {
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+  padding: 12px 20px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 6px;
+}
+
+.picker-item {
+  padding: 14px 24px;
+  font-size: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.picker-item.active {
+  color: #6B5B95;
+  font-weight: 500;
+}
 
 .post-form {
   flex: 1;
