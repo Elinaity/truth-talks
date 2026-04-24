@@ -85,6 +85,10 @@ Page({
     this.setData({ showCategoryPicker: !this.data.showCategoryPicker })
   },
 
+  preventTap() {
+    // 阻止事件冒泡到遮罩层
+  },
+
   // 加载更多
   onLoadMore() {
     this.loadPosts()
@@ -111,6 +115,7 @@ Page({
 
     try {
       const db = wx.cloud.database()
+      const _ = db.command
 
       // 更新数据库
       await db.collection('posts').doc(id).update({

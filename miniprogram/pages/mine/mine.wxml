@@ -39,7 +39,7 @@
     </view>
     <view class="rules-list">
       <view class="rule-item">• 每天可发布 5 条真心话</view>
-      <view class="rule-item">• 每条内容最多 200 字</view>
+      <view class="rule-item">• 每条内容最多 500 字</view>
       <view class="rule-item">• 禁止人身攻击、违法内容</view>
       <view class="rule-item">• 保护隐私，禁止泄露他人信息</view>
     </view>
@@ -63,7 +63,7 @@
         <view class="post-meta">
           <text class="post-time">{{item.timeAgo}}</text>
           <view class="post-stats">
-            <text>❤️ {{item.likes}}</text>
+            <text>🤍 {{item.likes}}</text>
             <text>💬 {{item.commentCount}}</text>
           </view>
         </view>
