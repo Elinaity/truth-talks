@@ -1,6 +1,7 @@
 {
-  "navigationBarBackgroundColor": "#6B5B95",
-  "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "发布真心话",
-  "disableScroll": true
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  }
 }

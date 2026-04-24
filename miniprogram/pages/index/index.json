@@ -1,7 +1,8 @@
 {
-  "navigationBarBackgroundColor": "#6B5B95",
-  "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "全部",
+  "navigationStyle": "custom",
   "enablePullDownRefresh": true,
-  "backgroundColor": "#F7F5F2"
+  "backgroundColor": "#F7F5F2",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  }
 }

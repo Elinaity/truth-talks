@@ -18,7 +18,6 @@ Page({
     const cats = this.data.categories
     const name = cats.find(c => c.key === 'all')?.name || '全部'
     this.setData({ currentCategoryName: name })
-    wx.setNavigationBarTitle({ title: name })
     this.loadPosts()
   },
 
@@ -27,7 +26,6 @@ Page({
     const cat = cats.find(c => c.key === this.data.category)
     const name = cat?.name || this.data.currentCategoryName || '全部'
     this.setData({ page: 0, posts: [], noMore: false, currentCategoryName: name, showCategoryPicker: false })
-    wx.setNavigationBarTitle({ title: name })
     this.loadPosts()
   },
 
@@ -80,7 +78,6 @@ Page({
     const cats = this.data.categories
     const name = cats.find(c => c.key === key)?.name || '全部'
     this.setData({ category: key, currentCategoryName: name, page: 0, posts: [], noMore: false, showCategoryPicker: false })
-    wx.setNavigationBarTitle({ title: name })
     this.loadPosts()
   },
 
