@@ -1,11 +1,9 @@
 <view class="container">
-  <!-- 顶部类目选择栏 -->
-  <view class="category-bar">
-    <view class="category-current" bindtap="toggleCategoryPicker">
-      <text>{{currentCategoryName}}</text>
-      <text class="arrow {{showCategoryPicker ? 'up' : ''}}">▼</text>
-    </view>
-  </view>
+  <!-- 占位填充块 -->
+  <view class="navbar-placeholder"></view>
+
+  <!-- 自定义导航栏 -->
+  <navbar title="{{currentCategoryName}}" showPicker="{{showCategoryPicker}}" bind:arrowTap="toggleCategoryPicker" />
 
   <!-- 弹窗遮罩 -->
   <view class="picker-overlay" wx:if="{{showCategoryPicker}}" bindtap="toggleCategoryPicker">

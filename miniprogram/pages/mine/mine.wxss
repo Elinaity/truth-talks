@@ -5,7 +5,7 @@
 
 .nav-bar {
   height: 56px;
-  background: #6B5B95;
+  background: #6b5b95;
   display: flex;
   align-items: center;
   justify-content: center;
